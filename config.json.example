@@ -1,4 +1,5 @@
 {
+    "port": 9200,
     "db_host": "localhost",
     "db_user": "user",
     "db_password": "pass",

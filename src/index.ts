@@ -42,9 +42,9 @@ router.get('/area', async function(ctx: any, next: any) {
 router.post('/area', async function(ctx: any, next: any) {
     try {
         // This is our SQL query script
-        let query = "INSERT INTO stored_areas (id, data) VALUES(1, '" + ctx.request.body + "') ON DUPLICATE KEY UPDATE data='" + ctx.request.body + "';";
+        let query = "INSERT INTO stored_areas (id, data) VALUES(1, ?) ON DUPLICATE KEY UPDATE data=?;";
 
-        let result = await ctx.myPool().query(query);
+        let result = await ctx.myPool().query(query, [ctx.request.body, ctx.request.body]);
 
         console.log(result);
         ctx.body = result;
@@ -61,4 +61,4 @@ router.post('/area', async function(ctx: any, next: any) {
 
 app.use(router.routes())
 
-app.listen(9100);
+app.listen(config.port);
